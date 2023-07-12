@@ -162,7 +162,7 @@ function UserProfile() {
       ) : (
         <div className="user-profile-container">
           <div className="spinner"></div>
-          <div className="redirect-message">Usuário não encontrado!</div>
+          <div className="redirect-message">Usuário não encontrado!!</div>
         </div>
       )}
     </div>
