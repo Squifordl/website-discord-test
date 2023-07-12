@@ -34,7 +34,7 @@ function UserProfile() {
     const getUser = async () => {
       setIsLoading(true);
       try {
-        const response = await axios.get(`${process.env.BASE_URL}/api/users/${userId}`);
+        const response = await axios.get(`/api/users/${userId}`);
         if (response.data.user) {
           setUserStatus(true);
         } else {
@@ -54,7 +54,7 @@ function UserProfile() {
 
     const fetchMessages = async () => {
       try {
-        const response = await fetch(`${process.env.BASE_URL}/api/users/${user_id}/message`);
+        const response = await fetch(`/api/users/${user_id}/message`);
         const data = await response.json();
         setUserMessages(data.messages);
       } catch (error) {
@@ -82,10 +82,10 @@ function UserProfile() {
     }
 
     try {
-      await axios.post(`${process.env.BASE_URL}/api/users/${user_id}/message/`, {
+      await axios.post(`/api/users/${user_id}/message/`, {
         message
       });
-      const response = await fetch(`${process.env.BASE_URL}/api/users/${user_id}/message`);
+      const response = await fetch(`/api/users/${user_id}/message`);
       const data = await response.json();
       setUserMessages(data.messages);
       setShowWarning(false);
