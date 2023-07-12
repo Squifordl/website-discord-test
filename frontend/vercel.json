@@ -4,8 +4,16 @@
     "builds": [
         {
             "src": "package.json",
-            "use": "@now/static-build",
-            "config": { "distDir": "build" }
+            "use": "@vercel/node",
+            "config": {
+                "includeFiles": [
+                    "build"
+                ]
+            }
+        },
+        {
+            "src": "./build/**",
+            "use": "@vercel/static"
         }
     ],
     "routes": [
