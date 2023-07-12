@@ -6,7 +6,6 @@ import "../css/UserProfile.css";
 function UserProfile() {
   const { userId } = useParams();
   const [userStatus, setUserStatus] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
   const user_id = localStorage.getItem("userId");
   const username = localStorage.getItem("username");
   const avatar = localStorage.getItem("avatar");
@@ -16,10 +15,9 @@ function UserProfile() {
   const [userMessages, setUserMessages] = useState([]);
   const [showMessage, setShowMessage] = useState(false);
   const [showWarning, setShowWarning] = useState(false);
+  const BASE_URL = "https://squifordsexy-60b818587753.herokuapp.com/";
 
   const history = useHistory();
-
-  const BASE_URL = "https://squifordsexy-60b818587753.herokuapp.com/";
 
   useEffect(() => {
     const checkUser = async () => {
@@ -32,9 +30,7 @@ function UserProfile() {
       }
     };
     checkUser();
-
     const getUser = async () => {
-      setIsLoading(true);
       try {
         const response = await axios.get(`${BASE_URL}api/users/${userId}`);
         if (response.data.user) {
@@ -47,8 +43,6 @@ function UserProfile() {
         }
       } catch (error) {
         console.error(error);
-      } finally {
-        setIsLoading(false);
       }
     };
 
@@ -56,7 +50,7 @@ function UserProfile() {
 
     const fetchMessages = async () => {
       try {
-        const response = await axios.get(`${BASE_URL}api/users/${user_id}/message`);
+        const response = await fetch(`${BASE_URL}api/users/${user_id}/message`);
         const data = await response.json();
         setUserMessages(data.messages);
       } catch (error) {
@@ -87,7 +81,7 @@ function UserProfile() {
       await axios.post(`${BASE_URL}api/users/${user_id}/message/`, {
         message
       });
-      const response = await axios.get(`${BASE_URL}api/users/${user_id}/message`);
+      const response = await fetch(`${BASE_URL}api/users/${user_id}/message`);
       const data = await response.json();
       setUserMessages(data.messages);
       setShowWarning(false);
@@ -105,15 +99,9 @@ function UserProfile() {
   const handleFocus = () => {
     setShowWarning(false);
   };
-
   return (
     <div>
-      {isLoading ? (
-        <div className="user-profile-container">
-          <div className="spinner"></div>
-          <div className="loading-message">Carregando perfil...</div>
-        </div>
-      ) : userStatus ? (
+      {userStatus ? (
         <div className="user-profile-container">
           {
             <div className="user-profile-container">
