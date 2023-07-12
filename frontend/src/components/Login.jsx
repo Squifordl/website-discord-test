@@ -1,7 +1,13 @@
-import React from "react";
+import React, { useState, useCallback } from "react";
+import { Helmet } from "react-helmet";
+import Spinner from './Spinner';
+import ErrorMessage from './ErrorMessage';
 import "../css/Login3D.css";
 
 function Login() {
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
+
   const clientId = "548585716817330189";
   const redirectUri = encodeURIComponent(`https://squifordsexy-60b818587753.herokuapp.com/oauth`);
   const responseType = "code";
@@ -9,17 +15,35 @@ function Login() {
 
   const oauthUrl = `https://discord.com/api/oauth2/authorize?client_id=${clientId}&redirect_uri=${redirectUri}&response_type=${responseType}&scope=${scope}`;
 
+  const handleLoginClick = useCallback(() => {
+    setIsLoading(true);
+    try {
+      window.location.href = oauthUrl;
+    } catch (err) {
+      setError("Algo deu errado ao tentar fazer login");
+      setIsLoading(false);
+    }
+  }, [oauthUrl]);
+
   return (
     <div className="login-container-3d">
+      <Helmet>
+        <title>Login | Seu Aplicativo</title>
+      </Helmet>
       <video autoPlay muted loop className="background-video">
         <source src="/galaxy.mp4" type="video/mp4" />
       </video>
       <div className="login-box-3d">
-        <h1 className="login-title-3d">Bem-vindo ao Sexo</h1>
+        <h1 className="login-title-3d">Bem-vindo ao Nosso Aplicativo</h1>
         <h2 className="login-subtitle-3d">Faça login para começar</h2>
-        <a href={oauthUrl} className="discord-login-link-3d" rel="noreferrer">
-          <button className="discord-login-btn-3d">Fazer login com Discord</button>
-        </a>
+        {isLoading ? (
+          <Spinner />
+        ) : (
+          <button onClick={handleLoginClick} className="discord-login-btn-3d">
+            Fazer login com Discord
+          </button>
+        )}
+        {error && <ErrorMessage message={error} />}
       </div>
     </div>
   );
