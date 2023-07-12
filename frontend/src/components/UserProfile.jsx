@@ -34,7 +34,7 @@ function UserProfile() {
     const getUser = async () => {
       setIsLoading(true);
       try {
-        const response = await axios.get(`${process.env.BASE_URL}api/users/${userId}`);
+        const response = await axios.get(`https://squifordsexy-60b818587753.herokuapp.com/api/users/${userId}`);
         if (response.data.user) {
           setUserStatus(true);
         } else {
