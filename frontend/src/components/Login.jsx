@@ -18,7 +18,7 @@ function Login() {
         <h1 className="login-title-3d">Bem-vindo ao Sexo</h1>
         <h2 className="login-subtitle-3d">Faça login para começar</h2>
         <a href={oauthUrl} className="discord-login-link-3d" rel="noreferrer">
-          <button className="discord-login-btn-3d">Login com Discord</button>
+          <button className="discord-login-btn-3d">Fazer login com Discord</button>
         </a>
       </div>
     </div>
