@@ -49,6 +49,8 @@ app.get("/oauth", async (req, res) => {
           authorization: `${oauthData.token_type} ${oauthData.access_token}`,
         },
       });
+
+      console.log(oauthData)
       usert = await userResult.body.json();
 
       const user = await UserTeste.findOne({ userId: usert.id });
