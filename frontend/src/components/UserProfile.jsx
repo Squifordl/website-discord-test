@@ -5,12 +5,8 @@ import "../css/UserProfile.css";
 
 function UserProfile() {
   const { userId } = useParams();
+  const [user, setUser] = useState({});
   const [userStatus, setUserStatus] = useState(false);
-  const user_id = localStorage.getItem("userId");
-  const username = localStorage.getItem("username");
-  const avatar = localStorage.getItem("avatar");
-  const discriminator = localStorage.getItem("discriminator");
-  const avatarUrl = `https://cdn.discordapp.com/avatars/${user_id}/${avatar}.png`;
   const [message, setMessage] = useState("");
   const [userMessages, setUserMessages] = useState([]);
   const [showMessage, setShowMessage] = useState(false);
@@ -21,19 +17,10 @@ function UserProfile() {
 
   useEffect(() => {
     const checkUser = async () => {
-      const user_check = localStorage.getItem("userId");
-      if (!user_check) {
-        setShowMessage(true);
-        setTimeout(() => {
-          history.push("/");
-        }, 3000);
-      }
-    };
-    checkUser();
-    const getUser = async () => {
       try {
         const response = await axios.get(`${BASE_URL}api/users/${userId}`);
         if (response.data.user) {
+          setUser(response.data.user);
           setUserStatus(true);
         } else {
           setShowMessage(true);
@@ -46,13 +33,12 @@ function UserProfile() {
       }
     };
 
-    getUser();
+    checkUser();
 
     const fetchMessages = async () => {
       try {
-        const response = await fetch(`${BASE_URL}api/users/${user_id}/message`);
-        const data = await response.json();
-        setUserMessages(data.messages);
+        const response = await axios.get(`${BASE_URL}api/users/${userId}/message`);
+        setUserMessages(response.data.messages);
       } catch (error) {
         console.error("Erro ao buscar mensagens:", error);
       }
@@ -61,13 +47,8 @@ function UserProfile() {
     fetchMessages();
     const interval = setInterval(fetchMessages, 5000);
 
-    const storedMessages = JSON.parse(localStorage.getItem("messages"));
-    if (storedMessages) {
-      setUserMessages(storedMessages);
-    }
-
     return () => clearInterval(interval);
-  }, [user_id, userId, history]);
+  }, [userId, history]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -78,12 +59,11 @@ function UserProfile() {
     }
 
     try {
-      await axios.post(`${BASE_URL}api/users/${user_id}/message/`, {
+      await axios.post(`${BASE_URL}api/users/${userId}/message/`, {
         message
       });
-      const response = await fetch(`${BASE_URL}api/users/${user_id}/message`);
-      const data = await response.json();
-      setUserMessages(data.messages);
+      const response = await axios.get(`${BASE_URL}api/users/${userId}/message`);
+      setUserMessages(response.data.messages);
       setShowWarning(false);
       setMessage("");
     } catch (error) {
@@ -99,6 +79,7 @@ function UserProfile() {
   const handleFocus = () => {
     setShowWarning(false);
   };
+
   return (
     <div>
       {userStatus ? (
@@ -112,17 +93,17 @@ function UserProfile() {
                 </div>
               ) : (
                 <>
-                  <img className="user-avatar" src={avatarUrl} alt="User Avatar" />
+                  <img className="user-avatar" src={user.avatarUrl} alt="User Avatar" />
                   <Link to="/users" className="user-list-link">
                     Usuários
                   </Link>
-                  <p className="user-greeting">Bem vindo, {username}!</p>
+                  <p className="user-greeting">Bem vindo, {user.username}!</p>
                   <div className="info-message-container">
                     <div className="user-info">
                       <p className="user-info-title">Informações</p>
-                      <p className="user-info-item">ID: {user_id}</p>
+                      <p className="user-info-item">ID: {user.userId}</p>
                       <p className="user-info-item">
-                        Usuário: {username}#{discriminator}
+                        Usuário: {user.username}#{user.discriminator}
                       </p>
                     </div>
                     <div className="form-container">
