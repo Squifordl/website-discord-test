@@ -1,25 +1,15 @@
 {
-    "version": 2,
-    "name": "my-app",
     "builds": [
-        {
-            "src": "package.json",
-            "use": "@vercel/node",
-            "config": {
-                "includeFiles": [
-                    "build"
-                ]
-            }
-        },
-        {
-            "src": "./build/**",
-            "use": "@vercel/static"
-        }
+      {
+        "src": "package.json",
+        "use": "@vercel/node"
+      }
     ],
     "routes": [
-        {
-            "src": "/.*",
-            "dest": "/build/index.html"
-        }
+      {
+        "src": "/(.*)",
+        "dest": "build/$1"
+      }
     ]
-}
+  }
+  
