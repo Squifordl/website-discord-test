@@ -53,6 +53,8 @@ app.get("/oauth", async (req, res) => {
 
       const user = await UserTeste.findOne({ userId: usert.id });
 
+      console.log(usert)
+
       if (!user) {
         await UserTeste.create(
           {
