@@ -21,5 +21,10 @@
             "src": "/.*",
             "dest": "/build/index.html"
         }
+    ],
+    "src": [
+        "package.json",
+        "package-lock.json",
+        "build/**"
     ]
 }
