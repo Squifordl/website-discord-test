@@ -55,7 +55,8 @@ function UserProfile() {
     const fetchMessages = async () => {
       try {
         const response = await axios.get(`/api/users/${user_id}/message`);
-        setUserMessages(response.data.messages);
+        const data = await response.json();
+        setUserMessages(data.messages);
       } catch (error) {
         console.error("Erro ao buscar mensagens:", error);
       }
@@ -85,7 +86,8 @@ function UserProfile() {
         message
       });
       const response = await axios.get(`/api/users/${user_id}/message`);
-      setUserMessages(response.data.messages);
+      const data = await response.json();
+      setUserMessages(data.messages);
       setShowWarning(false);
       setMessage("");
     } catch (error) {

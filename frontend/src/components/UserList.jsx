@@ -19,9 +19,6 @@ function UserList() {
       setIsLoading(true);
       try {
         const response = await axios.get("/api/users");
-        if (response.headers['content-type'] !== 'application/json') {
-          throw new Error(`Unexpected response type: ${response.headers['content-type']}`);
-        }
         if (Array.isArray(response.data)) {
           setUsers(response.data);
           console.log("Usuários buscados:", response.data);
@@ -34,7 +31,7 @@ function UserList() {
       } finally {
         setIsLoading(false);
       }
-    }
+    };
 
     fetchUsers();
   }, []);
@@ -61,7 +58,6 @@ function UserList() {
     history.push(`/userprofile/${userId}`);
   };
 
-  console.log('test')
   return (
     <div className="user-list-container">
       {showMessage ? (
