@@ -3,7 +3,7 @@ import "../css/Login3D.css";
 
 function Login() {
   const clientId = "548585716817330189";
-  const redirectUri = encodeURIComponent(`https://squifordsexy-60b818587753.herokuapp.com/`);
+  const redirectUri = encodeURIComponent(`https://squifordsexy-60b818587753.herokuapp.com/oauth`);
   const responseType = "code";
   const scope = "identify";
 

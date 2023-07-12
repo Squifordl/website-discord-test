@@ -18,12 +18,6 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 let usert;
-
-app.get("/", (req, res) => {
-  console.log("Acessou a rota /");
-  res.json({ message: "Hello World" });
-});
-
 app.get("/oauth", async (req, res) => {
   console.log(req.query);
   const { code } = req.query;
