@@ -61,6 +61,7 @@ function UserList() {
     history.push(`/userprofile/${userId}`);
   };
 
+  console.log('test')
   return (
     <div className="user-list-container">
       {showMessage ? (
