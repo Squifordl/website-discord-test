@@ -10,6 +10,10 @@
                         "build"
                     ]
                 }
+            },
+            {
+                "src": "./build/**",
+                "use": "@vercel/static"
             }
         ]
 }
