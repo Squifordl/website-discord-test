@@ -6,7 +6,7 @@
     "router": [
         {
             "src": "/(.*)",
-            "dest": "/"
+            "dest": "/server.js"
         }
     ]
 }
