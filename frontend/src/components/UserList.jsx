@@ -23,7 +23,7 @@ function UserList() {
           setUsers(response.data);
           console.log("Usuários buscados:", response.data);
         } else {
-          console.error("A resposta da API está invalida:", response.data);
+          console.error("A resposta da API está invalida:", response);
         }
       } catch (error) {
         console.error("Erro ao buscar usuários:", error);
