@@ -1,7 +1,5 @@
 import React, { useState, useCallback } from "react";
 import { Helmet } from "react-helmet";
-import Spinner from './Spinner';
-import ErrorMessage from './ErrorMessage';
 import "../css/Login3D.css";
 
 function Login() {
@@ -28,22 +26,22 @@ function Login() {
   return (
     <div className="login-container-3d">
       <Helmet>
-        <title>Login | Seu Aplicativo</title>
+        <title>Login | Squiford</title>
       </Helmet>
       <video autoPlay muted loop className="background-video">
         <source src="/galaxy.mp4" type="video/mp4" />
       </video>
       <div className="login-box-3d">
-        <h1 className="login-title-3d">Bem-vindo ao Nosso Aplicativo</h1>
+        <h1 className="login-title-3d">Bem-vindo</h1>
         <h2 className="login-subtitle-3d">Faça login para começar</h2>
         {isLoading ? (
-          <Spinner />
+          <div className="discord-login-btn-3d">Carregando...</div>
         ) : (
           <button onClick={handleLoginClick} className="discord-login-btn-3d">
             Fazer login com Discord
           </button>
         )}
-        {error && <ErrorMessage message={error} />}
+        {error && <p style={{ color: 'red' }}>{error}</p>}
       </div>
     </div>
   );
