@@ -18,7 +18,7 @@ function UserList() {
     const fetchUsers = async () => {
       setIsLoading(true);
       try {
-        const response = await axios.get("/api/users");
+        const response = await axios.get(`${process.env.BASE_URL}/api/users`);
         if (Array.isArray(response.data)) {
           setUsers(response.data);
           console.log("Usuários buscados:", response.data);
