@@ -3,7 +3,7 @@ import "../css/Login3D.css";
 
 function Login() {
   const clientId = "548585716817330189";
-  const redirectUri = encodeURIComponent("http://localhost:8087/oauth");
+  const redirectUri = encodeURIComponent(`${process.env.BASE_URL}/oauth`);
   const responseType = "code";
   const scope = "identify";
 

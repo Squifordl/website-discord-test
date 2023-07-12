@@ -11,19 +11,12 @@ db.start();
 dotenv.config();
 
 app.use(express.static("build"));
-app.use(cors({
-  origin: process.env.BASE_URL,
-}));
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+
 let usert;
-
-app.get("/", (req, res) => {
-  console.log("Acessou a rota /");
-  res.json({ message: "Hello World" });
-});
-
 app.get("/oauth", async (req, res) => {
   console.log(req.query);
   const { code } = req.query;
