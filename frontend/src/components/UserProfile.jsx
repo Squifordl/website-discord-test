@@ -6,6 +6,7 @@ import "../css/UserProfile.css";
 function UserProfile() {
   const { userId } = useParams();
   const [userStatus, setUserStatus] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const user_id = localStorage.getItem("userId");
   const username = localStorage.getItem("username");
   const avatar = localStorage.getItem("avatar");
@@ -29,7 +30,9 @@ function UserProfile() {
       }
     };
     checkUser();
+
     const getUser = async () => {
+      setIsLoading(true);
       try {
         const response = await axios.get(`/api/users/${userId}`);
         if (response.data.user) {
@@ -42,6 +45,8 @@ function UserProfile() {
         }
       } catch (error) {
         console.error(error);
+      } finally {
+        setIsLoading(false);
       }
     };
 
@@ -98,9 +103,15 @@ function UserProfile() {
   const handleFocus = () => {
     setShowWarning(false);
   };
+
   return (
     <div>
-      {userStatus ? (
+      {isLoading ? (
+        <div className="user-profile-container">
+          <div className="spinner"></div>
+          <div className="loading-message">Carregando perfil...</div>
+        </div>
+      ) : userStatus ? (
         <div className="user-profile-container">
           {
             <div className="user-profile-container">

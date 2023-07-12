@@ -4,7 +4,6 @@ const dotenv = require("dotenv");
 const cors = require("cors");
 const path = require("path");
 const app = express();
-const routes = require("./src/components/Router");
 const db = require("./src/database/index");
 const UserTeste = require("./src/database/Schema/User");
 
@@ -15,7 +14,6 @@ app.use(express.static("build"));
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use("/", routes);
 
 
 let usert;
