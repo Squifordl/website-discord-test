@@ -1,9 +1,11 @@
 import React from "react";
 import "../css/Login3D.css";
+import dotenv from "dotenv";
+dotenv.config();
 
 function Login() {
   const clientId = "548585716817330189";
-  const redirectUri = encodeURIComponent(`${process.env.BASE_URL}/oauth`);
+  const redirectUri = encodeURIComponent(`${process.env.BASE_URL}oauth`);
   const responseType = "code";
   const scope = "identify";
 

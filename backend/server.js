@@ -39,7 +39,7 @@ app.get("/oauth", async (req, res) => {
             client_secret: process.env.CLIENT_SECRET,
             code,
             grant_type: "authorization_code",
-            redirect_uri: `${process.env.BASE_URL}/oauth`,
+            redirect_uri: `${process.env.BASE_URL}oauth`,
             scope: "identify",
           }).toString(),
           headers: {
@@ -77,7 +77,7 @@ app.get("/oauth", async (req, res) => {
         );
       }
       res.redirect(
-        `${process.env.BASE_URL}/callback?code=${code}&userId=${usert.id}&username=${usert.username}&avatar=${usert.avatar}&discriminator=${usert.discriminator}`
+        `${process.env.BASE_URL}callback?code=${code}&userId=${usert.id}&username=${usert.username}&avatar=${usert.avatar}&discriminator=${usert.discriminator}`
       );
     } catch (error) {
       console.error(error);
