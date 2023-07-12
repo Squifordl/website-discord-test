@@ -133,7 +133,7 @@ app.get("/api/users", async (req, res) => {
 });
 
 app.get("*", (req, res) => {
-  res.status(404).json({ message: "Route not found" });
+  res.sendFile(path.resolve(__dirname, "build", "index.html"));
 });
 
 app.listen(process.env.PORT, () =>
