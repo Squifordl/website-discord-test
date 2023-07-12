@@ -1,0 +1,54 @@
+/* LoadingSpinner.css */
+.spinner {
+  display: inline-block;
+  width: 80px;
+  height: 80px;
+  border: 8px solid rgba(0, 0, 0, 0.1);
+  border-top-color: #3498db;
+  border-radius: 50%;
+  animation: spin 1s linear infinite, fade 1.2s ease-in-out infinite;
+  position: relative;
+}
+
+.spinner::before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  box-shadow: 0 0 10px rgba(52, 152, 219, 0.5);
+  opacity: 0;
+  animation: pulse 1.2s ease-in-out infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes fade {
+  0%,
+  100% {
+    border-top-color: #3498db;
+  }
+  25% {
+    border-top-color: #9b59b6;
+  }
+  50% {
+    border-top-color: #e74c3c;
+  }
+  75% {
+    border-top-color: #f1c40f;
+  }
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+}
