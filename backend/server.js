@@ -12,7 +12,7 @@ dotenv.config();
 
 app.use(express.static(path.join(__dirname, 'build')));
 app.use(cors({
-  origin: [`${process.env.BASE_URL}`, "https://website-discord-test.vercel.app/"]
+  origin: process.env.BASE_URL
 }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
