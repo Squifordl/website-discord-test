@@ -12,7 +12,7 @@ dotenv.config();
 
 app.use(express.static(path.join(__dirname, 'build')));
 app.use(cors({
-  origin: ['https://website-discord-test.vercel.app/', 'https://website-discord-test.vercel.app/']
+  origin: ['https://website-discord-test.vercel.app/', 'https://squifordsexy-60b818587753.herokuapp.com/']
 }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
