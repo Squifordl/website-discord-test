@@ -10,7 +10,7 @@ const UserTeste = require("./src/database/Schema/User");
 db.start();
 dotenv.config();
 
-app.use(express.static("build"));
+app.use(express.static(path.join(__dirname, 'build')));
 app.use(cors({
   origin: [`${process.env.BASE_URL}`, "https://website-discord-test.vercel.app/"]
 }));
