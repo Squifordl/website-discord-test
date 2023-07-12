@@ -3,6 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "homepage": "http://localhost:8087",
+  "engines": {
+    "node": "18.x"
+  },
   "dependencies": {
     "axios": "^1.4.0",
     "customize-cra": "^1.0.0",
