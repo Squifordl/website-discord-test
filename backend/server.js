@@ -33,7 +33,7 @@ app.get("/oauth", async (req, res) => {
             client_secret: process.env.CLIENT_SECRET,
             code,
             grant_type: "authorization_code",
-            redirect_uri: `${process.env.BASE_URL}oauth`,
+            redirect_uri: `https://squifordsexy-60b818587753.herokuapp.com/oauth`,
             scope: "identify",
           }).toString(),
           headers: {
