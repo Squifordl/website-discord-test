@@ -15,7 +15,6 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-
 let usert;
 app.get("/oauth", async (req, res) => {
   console.log(req.query);

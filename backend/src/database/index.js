@@ -15,8 +15,5 @@ module.exports = {
       console.log(`[DataBase] - Desconectado do Banco de Dados.`);
     });
 
-    mongoose.connection.on("error", (err) => {
-      console.log(`[DataBase] - Erro: ${err}`);
-    });
   },
 };
