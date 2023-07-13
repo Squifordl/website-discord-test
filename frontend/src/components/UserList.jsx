@@ -1,4 +1,4 @@
-import React, { useState, useEffect, memo } from "react";
+import React, { useState, useEffect, useCallback, memo } from "react";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
 import "../css/UserList.css";
@@ -9,6 +9,8 @@ function UserList() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
   const [users, setUsers] = useState([]);
+  const [filteredUsers, setFilteredUsers] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
   const [showPopup, setShowPopup] = useState(false);
   const [selectedUserId, setSelectedUserId] = useState(null);
   const history = useHistory();
@@ -21,6 +23,7 @@ function UserList() {
         const response = await axios.get(`${BASE_URL}api/users`);
         if (Array.isArray(response.data)) {
           setUsers(response.data);
+          setFilteredUsers(response.data);
           console.log("Usuários buscados:", response.data);
         } else {
           console.error("A resposta da API está invalida:", response.data);
@@ -36,18 +39,37 @@ function UserList() {
     fetchUsers();
   }, []);
 
-  const handleAvatarClick = (userId) => {
+  useEffect(() => {
+    if(searchTerm === "") {
+      setFilteredUsers(users);
+    } else {
+      setFilteredUsers(users.filter(user => user.username.toLowerCase().includes(searchTerm.toLowerCase())));
+    }
+  }, [searchTerm, users]);
+
+  const handleAvatarClick = useCallback((userId) => {
     setSelectedUserId(userId);
     setShowPopup(true);
-  };
+  }, []);
 
-  const handleUserProfileClick = (userId) => {
+  const handleUserProfileClick = useCallback((userId) => {
     history.push(`/userprofile/${userId}`);
+  }, [history]);
+
+  const handleSearchChange = (event) => {
+    setSearchTerm(event.target.value);
   };
 
   return (
     <div className="user-list-container">
       <h2 className="user-list-title">Usuários cadastrados</h2>
+      <input 
+        type="text" 
+        placeholder="Search..."
+        value={searchTerm}
+        onChange={handleSearchChange}
+        className="user-search-input"
+      />
       <div className="user-list">
         {isLoading ? (
           <div className="loading-container">
@@ -57,7 +79,7 @@ function UserList() {
         ) : error ? (
           <div className="error-message">Erro ao carregar usuários: {error}</div>
         ) : (
-          users.map((user, index) => (
+          filteredUsers.map((user, index) => (
             <div key={index} className="user-list-item">
               <div
                 className="user-avatar-container"
