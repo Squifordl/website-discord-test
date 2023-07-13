@@ -22,6 +22,11 @@
   }
 }
 
+body {
+  height: 100%;
+  overflow-y: auto;
+}
+
 .user-profile {
   margin: 0;
   font-family: "Poppins", sans-serif;
