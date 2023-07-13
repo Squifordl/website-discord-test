@@ -49,7 +49,9 @@
 }
 
 .user-list-container {
-  padding: 20px;
+  height: 100vh;
+  overflow: auto;
+  padding: 10px;
   font-family: "Roboto", sans-serif;
 }
 
