@@ -19,11 +19,6 @@
     opacity: 1;
   }
 }
-.user-profile {
-  margin: 0;
-  font-family: "Poppins", sans-serif;
-  background-color: #1e1e1e;
-}
 
 .user-profile-container {
   display: flex;
@@ -33,7 +28,6 @@
   min-height: 100vh;
   background-color: #1e1e1e;
   padding: 16px;
-  overflow: auto;
   animation: scale-up 0.5s cubic-bezier(0.2, 0.5, 0.35, 1);
 }
 
@@ -65,10 +59,6 @@
   transition: transform 0.3s ease;
 }
 
-.user-avatar:hover {
-  transform: scale(1.1);
-}
-
 .user-greeting {
   color: white;
   font-size: 24px;
@@ -87,10 +77,6 @@
   color: #b9bbbe;
   font-size: 16px;
   margin-bottom: 10px;
-}
-
-.user-info-item:last-child {
-  margin-bottom: 0;
 }
 
 .user-info,
@@ -125,12 +111,6 @@
   transition: all 0.3s ease;
 }
 
-.form-input:focus {
-  outline: none;
-  border-color: #4e5b9a;
-  box-shadow: 0 0 5px rgba(78, 91, 154, 0.5);
-}
-
 .form-submit {
   background-color: #7289da;
   border: none;
@@ -144,10 +124,6 @@
   transition: background-color 0.3s ease;
 }
 
-.form-submit:hover {
-  background-color: #4e5b9a;
-}
-
 .messages-list {
   display: flex;
   flex-direction: column;
@@ -155,13 +131,9 @@
   margin-top: 24px;
   width: 100%;
   max-height: 300px;
+  overflow: auto;
   background-color: #222;
   padding: 8px;
-}
-
-.message-item {
-  font-family: "Ubuntu Mono", monospace;
-  color: #00ff00;
 }
 
 .messages-list-title {
@@ -171,144 +143,8 @@
   margin-bottom: 8px;
 }
 
-.messages-list ul {
-  list-style-type: none;
-  padding: 0;
-  display: flex;
-  flex-direction: column-reverse;
-  align-items: center;
-  width: 100%;
-}
-
 .message-item {
-  background-color: #23272a;
-  border-radius: 4px;
-  color: white;
-  font-size: 16px;
+  font-family: "Ubuntu Mono", monospace;
+  color: #00ff00;
   margin-bottom: 8px;
-  padding: 8px 16px;
-  text-align: center;
-  width: 80%;
-}
-
-.messages-list::-webkit-scrollbar {
-  width: 8px;
-}
-
-.messages-list::-webkit-scrollbar-thumb {
-  background-color: #7289da;
-  border-radius: 4px;
-}
-
-.warning {
-  color: #ff6b81;
-  font-size: 14px;
-  margin-bottom: 8px;
-}
-
-.user-list-link {
-  color: white;
-  font-size: 18px;
-  font-weight: bold;
-  text-decoration: none;
-  margin-bottom: 16px;
-}
-
-.user-list-link:hover {
-  color: #7289da;
-  text-decoration: underline;
-}
-
-.profile-description-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
-  margin-bottom: 24px;
-}
-
-.profile-description-title {
-  color: #7289da;
-  font-size: 18px;
-  font-weight: bold;
-  margin-bottom: 12px;
-}
-
-.profile-description {
-  color: #b9bbbe;
-  font-size: 16px;
-  margin-bottom: 10px;
-  text-align: center;
-  width: 100%;
-}
-
-.profile-description-textarea {
-  background-color: #1e1e1e;
-  border: 1px solid #7289da;
-  border-radius: 4px;
-  color: white;
-  font-family: "Poppins", sans-serif;
-  font-size: 16px;
-  margin-bottom: 8px;
-  padding: 8px 12px;
-  width: 100%;
-  transition: all 0.3s ease;
-}
-
-.profile-description-textarea:focus {
-  outline: none;
-  border-color: #4e5b9a;
-  box-shadow: 0 0 5px rgba(78, 91, 154, 0.5);
-}
-
-.edit-description-btn {
-  background-color: #7289da;
-  border: none;
-  border-radius: 4px;
-  color: white;
-  cursor: pointer;
-  font-family: "Poppins", sans-serif;
-  font-size: 16px;
-  padding: 8px 16px;
-  margin-top: 8px;
-  transition: background-color 0.3s ease;
-}
-
-.edit-description-btn:hover {
-  background-color: #4e5b9a;
-}
-
-.not-found-popup {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000;
-}
-
-.not-found-popup-content {
-  background-color: #fff;
-  padding: 20px;
-  border-radius: 8px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 16px;
-  animation: scale-up 0.5s cubic-bezier(0.2, 0.5, 0.35, 1);
-}
-
-.not-found-popup-content h3 {
-  margin-bottom: 16px;
-}
-
-@media (max-width: 768px) {
-  .form-input,
-  .message-item {
-    width: 100%;
-  }
 }
