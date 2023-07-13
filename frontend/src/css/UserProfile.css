@@ -33,6 +33,7 @@
   min-height: 100vh;
   background-color: #1e1e1e;
   padding: 16px;
+  overflow: auto;
   animation: scale-up 0.5s cubic-bezier(0.2, 0.5, 0.35, 1);
 }
 
@@ -51,6 +52,7 @@
   align-items: center;
   width: 100%;
   max-width: 800px;
+  overflow: auto;
 }
 
 .user-avatar {
