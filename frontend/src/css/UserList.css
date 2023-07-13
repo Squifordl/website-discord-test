@@ -14,16 +14,22 @@
 
 .user-avatar {
   transition: filter 0.3s ease;
-  width: 160px;
-  height: 160px;
+  width: 100%;
+  height: auto;
   border-radius: 50%;
   object-fit: cover;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+  max-width: 160px;
 }
 
 .user-avatar-container {
   position: relative;
   cursor: pointer;
+}
+
+.user-list-item.clicked {
+  background-color: #f0f0f0;
+  transition: background-color 0.3s ease;
 }
 
 .user-avatar-container:hover .user-avatar {
@@ -54,8 +60,8 @@
 
 .user-list {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
   gap: 30px;
 }
 
@@ -125,4 +131,33 @@
   border-radius: 5px;
   text-align: center;
   gap: 15px;
+  max-width: 90%;
+  width: 400px;
+}
+
+@media screen and (min-width: 768px) {
+  .user-list {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .user-avatar {
+    width: 160px;
+    height: 160px;
+  }
+
+  .user-list-item {
+    width: calc(50% - 60px);
+  }
+
+  .popup-content {
+    width: auto;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .user-list-item {
+    width: calc(33.33% - 60px);
+  }
 }

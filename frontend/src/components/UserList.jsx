@@ -4,6 +4,7 @@ import axios from "axios";
 import "../css/UserList.css";
 import "../css/UserListRedirectMessage.css";
 import "../css/LoadingSpinner.css";
+import Pagination from './Pagination';
 
 function UserList() {
   const [isLoading, setIsLoading] = useState(false);
@@ -13,6 +14,9 @@ function UserList() {
   const [searchTerm, setSearchTerm] = useState("");
   const [showPopup, setShowPopup] = useState(false);
   const [selectedUserId, setSelectedUserId] = useState(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [usersPerPage] = useState(10);
+  const [selectedUserElement, setSelectedUserElement] = useState(null);
   const history = useHistory();
   const BASE_URL = "https://squifordsexy-60b818587753.herokuapp.com/";
 
@@ -47,10 +51,16 @@ function UserList() {
     }
   }, [searchTerm, users]);
 
-  const handleAvatarClick = useCallback((userId) => {
+  const handleAvatarClick = useCallback((userId, event) => {
     setSelectedUserId(userId);
     setShowPopup(true);
-  }, []);
+    if (selectedUserElement) {
+      selectedUserElement.classList.remove('clicked');
+    }
+    const newUserElement = event.currentTarget.parentElement;
+    newUserElement.classList.add('clicked');
+    setSelectedUserElement(newUserElement);
+  }, [selectedUserElement]);
 
   const handleUserProfileClick = useCallback((userId) => {
     history.push(`/userprofile/${userId}`);
@@ -59,6 +69,19 @@ function UserList() {
   const handleSearchChange = (event) => {
     setSearchTerm(event.target.value);
   };
+
+  const handlePopupClose = () => {
+    setShowPopup(false);
+    if (selectedUserElement) {
+      selectedUserElement.classList.remove('clicked');
+    }
+  };
+
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
+  const indexOfLastUser = currentPage * usersPerPage;
+  const indexOfFirstUser = indexOfLastUser - usersPerPage;
+  const currentUsers = filteredUsers.slice(indexOfFirstUser, indexOfLastUser);
 
   return (
     <div className="user-list-container">
@@ -79,11 +102,11 @@ function UserList() {
         ) : error ? (
           <div className="error-message">Erro ao carregar usuários: {error}</div>
         ) : (
-          filteredUsers.map((user, index) => (
+          currentUsers.map((user, index) => (
             <div key={index} className="user-list-item">
               <div
                 className="user-avatar-container"
-                onClick={() => handleAvatarClick(user.userId)}
+                onClick={(event) => handleAvatarClick(user.userId, event)}
                 role="button"
                 aria-label="Abrir perfil de usuário"
               >
@@ -109,7 +132,7 @@ function UserList() {
           <div className="popup">
             <div className="popup-content">
               <h3>Deseja ser redirecionado para o perfil do usuário?</h3>
-              <button onClick={() => setShowPopup(false)}>Cancelar</button>
+              <button onClick={handlePopupClose}>Cancelar</button>
               <button onClick={() => (window.location.href = `https://discord.com/users/${selectedUserId}`)}>
                 Ir para o perfil
               </button>
@@ -117,6 +140,11 @@ function UserList() {
           </div>
         )}
       </div>
+      <Pagination 
+        usersPerPage={usersPerPage} 
+        totalUsers={filteredUsers.length} 
+        paginate={paginate} 
+      />
     </div>
   );
 }
